@@ -1,2 +1,0 @@
-# misconduct-viz
-for wnyc
