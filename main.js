@@ -1,12 +1,8 @@
-
-writeData(all_data, 0);
-removeHighlight();
-
 function addDataBox2 (i, finding, id) {
 
 	//Make box with class tooltip//
 	const newBox = 	document.createElement("div");
-	$(newBox).addClass(`tooltip highlight ${id}`);
+	$(newBox).addClass(`tooltip ${id}`);
 
 	setTimeout(() => {
 		$(newBox).addClass("fade-in");  //Fade effect on the boxes
@@ -24,31 +20,14 @@ function addDataBox2 (i, finding, id) {
 	document.getElementById("graphic").appendChild(newBox);
 };
 
-
-function addHighlight(counter){
-
-	//Add highlight//
-	let boxes = document.getElementsByClassName(`${counter}`)
-	console.log(counter)
-	for (var i = 0; i < boxes.length; i++) {
-		boxes[i].classList.add('highlight');
-	 }
-};
-
-function removeHighlight(){
-	//Remove highlight//
-	let oldBoxes = document.getElementsByClassName("tooltip")
-	for (var i = 0; i < oldBoxes.length; i++) {
-		oldBoxes[i].classList.remove('highlight');
-	 }
-}
-
 function moveBullet(counter){
-	//lights up next bullet//
 	let bullets = document.getElementsByClassName('bullet');
 	for (var i = 0; i < bullets.length; i++) {
 		bullets[i].style.color = 'black'; //color the inactive bullets
 	 }
+
+	//lights up next bullet//
+
 	bullets[counter].style.color = 'crimson'; //color the active bullet
 
 };
@@ -62,7 +41,13 @@ function deactivateButton(buttonID){
 	document.getElementById(`${buttonID}`).disabled = true;
 };*/
 
+function removeElement(id){
+	document.getElementById(id).style.display = 'none';
+}
 
+function addElement(id){
+	document.getElementById(id).style.display = 'block';
+}
 
 function writeData (data, id) {
 	for (i = 0; i < data.length; i++) {
@@ -81,189 +66,154 @@ function clearData(){
 };
 
 
-
 counter = 0 //Keeps track of where the visualization is.
 
-function captionCheck(counter){
-	if (counter === 1){
-		document.getElementById(`caption1`).innerHTML = 'The documents show over 800 misconduct findings.';
-	} else if (counter === 1){
-		document.getElementById(`caption1`).innerHTML = 'The department had 13 cases of excessive force.';
-	} else if (counter ===2){
-		document.getElementById(`caption2`).innerHTML = 'The department had 6 cases of misconduct related to officers driving under the influence (DWI).';
-	} else if (counter ===3){
-		document.getElementById(`caption3`).innerHTML = 'The department substantiated 20 instances of officers lying or issuing misleading or inaccurate statements.';
-	} else if (counter ===4){
-		document.getElementById(`caption4`).innerHTML = 'The department had 15 cases of firearm related misconduct, such as when an officer accidentally shoots a gun. In one instance, an officer let an 18-year old take his firearm in order to take a photo with it.';
-	} else if (counter ===5){
-		document.getElementById(`caption5`).innerHTML = 'Two substantiated investigations were related to domestic violence. In one case, an officer threatened a woman with arrest in an attempt to get her not to press charges against another resident, presumably her partner.';
-	} else if (counter ===6){
-		document.getElementById(`caption6`).innerHTML = 'Another twenty cases involved off-duty misconduct. Many of these involved officers leaving the scenes of a crimes, in some cases under the influence.';
-	} else if (counter ===7){
-		document.getElementById(`caption7`).innerHTML = '28 findings were FADO, which stands for Force, Abuse of Authority, Discourtesy and Offensive Language.';
-	} else if (counter ===8){
-		document.getElementById(`caption8`).innerHTML = 'The remaining 400 plus misconduct findings were minor misconduct violations, including anything from missing a department phone to skipping traffic court.';
-	} else if (counter ===9){
-		document.getElementById(`caption9`).innerHTML = 'The findings give a slim window into the breadth of misconduct findings that will become available once 50-a is repealed in court.';
-}};
+function resetToBeginning(counter){
+	clearData();
+	moveBullet(counter)
+	addElement('announce');
+	addElement('title-hero');
+	console.log('Reset everything')
+}
 
-
-function Visualize(){
-	counter=counter + 1
-	console.log(`Counter at ${counter}.`)
-
-	if (counter === 1){
-		clearData();
-		writeData(force_data, counter);
-		moveBullet(counter);
-		/*activateButton('previous-button');*/
-		/*document.getElementById('next-button').innerHTML = "Next"; //Changes button text from 'begin' to 'next'*/
-
-		captionCheck(counter);
-
-	} else if (counter === 2){
-		removeHighlight();
-		writeData(dwi_data, counter);
-		moveBullet(counter);
-		captionCheck(counter);
-
-	} else if (counter === 3){
-		removeHighlight();
-		writeData(lying_data, counter);
-		moveBullet(counter);
-
-		captionCheck(counter);
-
-	} else if (counter === 4){
-		removeHighlight();
-		writeData(firearm_data, counter);
-		moveBullet(counter);
-		captionCheck(counter);
-
-	} else if (counter ===5){
-		removeHighlight();
-		writeData(domesticEEO_data, counter);
-		moveBullet(counter);
-		captionCheck(counter);
-
-	} else if (counter ===6){
-		removeHighlight();
-		writeData(offDuty_data, counter);
-		moveBullet(counter);
-		captionCheck(counter);
-
-	} else if (counter ===7){
-		removeHighlight();
-		writeData(fado_data, counter); //
-		moveBullet(counter);
-		captionCheck(counter);
-
-	} else if (counter ===8){
-		removeHighlight();
-		writeData(commandDiscipline_data, counter);
-		moveBullet(counter);
-		captionCheck(counter);
-
-	} else if (counter===9){
-		removeHighlight();
-		/*deactivateButton('next-button');*/
-		captionCheck(counter);
-		moveBullet(counter);
-	}
-	/// Add remaining Data groups
-};
-
-function previous(){
-
-	console.log(`Counter moved back to ${counter-1} because you hit the previous button`); //tracker
-
-	//Delete boxes that were just written//
-	let oldBoxes = document.getElementsByClassName(`${counter}`);
-	for (i = 0; i < oldBoxes.length; i++){
-		oldBoxes[i].style.display = 'none'
-	}
-
-	//Check that the counter is not zero before moving the counter back. If it is zero, keeps the counter at zero.
-	if (counter != 0) {
-		counter = counter - 1
-	};
-
-	//rehighlight boxes that were previously highlighted
-
-	addHighlight(counter);
-	captionCheck(counter);
+function scene1(counter){
+	//Clears everything
+	//Writes all initial boxes
+	writeData(all_data, 0);		
 	moveBullet(counter);
-
-
-	if (counter===0){
-		deactivateButton("previous-button");
-		writeData(all_data, 0);
-		removeHighlight();
-	
-	} else if (counter ===8) {
-		activateButton("next-button");
-	}
-
+	//removes the opening page elements, like the paragraph intro and the 'Scroll to begin' sign.
+	removeElement('announce');
+	removeElement('title-hero');
+	removeElement('caption-intro')
 };
 
-/******** SCROLL SPIES ********/
+function scene2(counter){
+	clearData();
+	writeData(force_data, counter);
+	moveBullet(counter);
+}
 
+function scene3(counter){
+	clearData();
+	writeData(dwi_data, counter);
+	moveBullet(counter)
+};
+
+function scene4(counter){
+	clearData();
+	writeData(lying_data, counter);
+	moveBullet(counter);
+}
+
+function scene5(counter){
+	clearData();
+	writeData(firearm_data, counter);
+	moveBullet(counter);
+}
+
+function scene6(counter){
+	clearData();
+	writeData(domesticEEO_data, counter);
+	moveBullet(counter);
+}
+
+function scene7(counter){
+	clearData();
+	writeData(offDuty_data, counter);
+	moveBullet(counter);
+}
+
+function scene8(counter){
+	clearData();
+	writeData(fado_data, counter);
+	console.log('something else happens')
+	moveBullet(counter);
+}
+
+function scene9(counter){
+	clearData();
+	writeData(commandDiscipline_data, counter);
+	moveBullet(counter)
+}
+
+/******** SCROLL SPY LOGIC********/
+
+// Stage 0: Title and header //
+const watchReset = new Watch(".scroll-spy-reset");
+watchReset.inView(()=>{
+	counter = 0
+	resetToBeginning(counter);
+	console.log('now reset everything')
+});
+
+//	Scene 1: Base boxes //
 const watch1 = new Watch(".scroll-spy-1");
-
-watch1.oneInView(() => {
-	Visualize();
-	document.getElementById('caption').style.display = 'none';
+watch1.inView(()=>{
+	counter = 1
+	scene1(counter);
+	console.log('Interactive at Scene 1')
 });
 
 const watch2 = new Watch(".scroll-spy-2");
+watch2.inView(() => {
+	counter = 2
+	scene2(counter);
+	console.log('Interactive at Scene 2')
 
-watch2.oneInView(() => {
-	Visualize();
 });
 
 const watch3 = new Watch(".scroll-spy-3");
+watch3.inView(() => {
+	counter = 3
+	scene3(counter);
+	console.log('Interactive at Scene 3')
 
-watch3.oneInView(() => {
-	Visualize();
 });
 
 const watch4 = new Watch(".scroll-spy-4");
-
-watch4.oneInView(() => {
-	Visualize();
+watch4.inView(() => {
+	counter = 4;
+	scene4(counter);
+	console.log('At Scene 4');
 });
 
 const watch5 = new Watch(".scroll-spy-5");
 
-watch5.oneInView(() => {
-	Visualize();
+watch5.inView(() => {
+	counter = 5;
+	scene5(counter);
+	console.log('At Scene 5');
 });
 
 const watch6 = new Watch(".scroll-spy-6");
 
-watch6.oneInView(() => {
-	Visualize();
+watch6.inView(() => {
+	counter = 6;
+	scene6(counter);
 });
 
 const watch7 = new Watch(".scroll-spy-7");
 
-watch7.oneInView(() => {
-	Visualize();
+watch7.inView(() => {
+	counter = 7;
+	scene7(counter);
 });
 
 const watch8 = new Watch(".scroll-spy-8");
 
-watch8.oneInView(() => {
-	Visualize();
+watch8.inView(() => {
+	counter = 8;
+	scene8(counter);
 });
 
 const watch9 = new Watch(".scroll-spy-9");
-
-watch9.oneInView(() => {
-	Visualize();
+watch9.inView(() => {
+	counter = 9;
+	scene9(counter);
 });
 
 
+//Code Graveyard//
 
 /*
 document.addEventListener("DOMContentLoaded", () => {
@@ -276,11 +226,77 @@ document.addEventListener("DOMContentLoaded", () => {
 	});
 });*/
 
+/*function addHighlight(counter){
 
-/*Counter guide*/
+	//Add highlight//
+	let boxes = document.getElementsByClassName(`${counter}`)
+	console.log(counter)
+	for (var i = 0; i < boxes.length; i++) {
+		boxes[i].classList.add('highlight');
+	 }
+};
 
-//Counter at 0 means base visualization of all data
+function removeHighlight(){
+	//Remove highlight//
+	let oldBoxes = document.getElementsByClassName("tooltip")
+	for (var i = 0; i < oldBoxes.length; i++) {
+		oldBoxes[i].classList.remove('highlight');
+	 }
+}
 
-//Counter at 1 means show force data
+function Visualize(){
+	counter=counter + 1
 
-//Counter at 2 means show DWI data//
+	console.log(`Counter at ${counter}.`)
+
+	if (counter === 1){
+		clearData(); //Grabs all current .tooltip and sets to display=none//
+		writeData(force_data, counter); //Writes x number of boxes//
+		moveBullet(counter); //Moves the bullet down based on the counter position.
+		/*activateButton('previous-button');*/
+		/*document.getElementById('next-button').innerHTML = "Next"; //Changes button text from 'begin' to 'next'
+
+	} else if (counter === 2){
+		removeHighlight();
+		writeData(dwi_data, counter);
+		moveBullet(counter);
+
+	} else if (counter === 3){
+		removeHighlight();
+		writeData(lying_data, counter);
+		moveBullet(counter);
+
+
+	} else if (counter === 4){
+		removeHighlight();
+		writeData(firearm_data, counter);
+		moveBullet(counter);
+
+	} else if (counter ===5){
+		removeHighlight();
+		writeData(domesticEEO_data, counter);
+		moveBullet(counter);
+
+	} else if (counter ===6){
+		removeHighlight();
+		writeData(offDuty_data, counter);
+		moveBullet(counter);
+
+	} else if (counter ===7){
+		removeHighlight();
+		writeData(fado_data, counter); //
+		moveBullet(counter);
+
+	} else if (counter ===8){
+		removeHighlight();
+		writeData(commandDiscipline_data, counter);
+
+	} else if (counter===9){
+		removeHighlight();
+		/*deactivateButton('next-button');
+		moveBullet(counter);
+	}
+};
+
+
+*/

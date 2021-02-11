@@ -22,35 +22,6 @@ body {
         height: 100vh;
         display: flex;
     }
-    .title{
-        background-color: black;
-        width: 100%;
-    }
-    .title-text {
-        color: white;
-        position: absolute;
-        font-size: 1.2em;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-    }
-    .title-text h6{
-        text-align: center;
-        padding-top: 10%;
-        padding-left: 12%;
-        padding-right: 12%;
-    }
-    .right-side-hero{
-        width: 50%;
-        height: 100vh;
-    }
-    .right-side-hero img{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        height: 50%;
-    }
 
     img {
         margin: 0;
@@ -289,34 +260,25 @@ body {
         height: 100vh;
         display: flex;
     }
+
     .title{
         background-color:white;
         width: 100%;
     }
+
     .title-text {
-        color: white;
         position: absolute;
-        font-size: 1.5em;
-        top: 50%;
+        font-size: 3.5em;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
     }
-    .title-text h6{
+    .title-text h1{
         text-align: center;
         padding-top: 10%;
         padding-left: 12%;
         padding-right: 12%;
-    }
-    .right-side-hero{
-        width: 50%;
-        height: 100vh;
-    }
-    .right-side-hero img{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        height: 50%;
     }
 
     img {
@@ -439,15 +401,36 @@ body {
     /********* Scroll Spy *************/
     .scroll-spy{
         position: absolute;
-        height: 800vh;
-        left: 50%;
+        margin-top: 0vh;
+        width: 100vw;
     }
+
     .scroll-spy div{
         position: relative;
-        margin-top: 900px;
-        width: 600px;
-        left: -50%;
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 100vh;
+        background-color: lightgrey;  /*These are styles for the font in the gray scrolling boxes*/
+        opacity: .98;
+        border-radius: 2%;
+        max-height: 40vh;
     }
+
+    .scroll-spy div p{
+        text-align: center;
+        padding: 5%;
+    }
+    
+    body > div.scroll-spy > div.scroll-text.scroll-spy-reset{
+        height: 0;
+        background-color: white;
+    }
+
+    #caption10{
+        margin-bottom: 300px;
+    }
+
+
 
 
     /********* TOOLTIPS ***************/
