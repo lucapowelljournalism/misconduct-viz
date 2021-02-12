@@ -1,4 +1,6 @@
-function addDataBox2 (i, finding, id) {
+const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve,delay))
+
+async function addDataBox2 (i, finding, id) {
 
 	//Make box with class tooltip//
 	const newBox = 	document.createElement("div");
@@ -24,7 +26,6 @@ function addDataBox2 (i, finding, id) {
 function addDataBox3(location){
 	const newBox = 	document.createElement("div");
 	$(newBox).addClass(`tooltip`);
-
 	setTimeout(() => {
 		$(newBox).addClass("fade-in");  //Fade effect on the boxes
 	}, 650);
@@ -32,27 +33,31 @@ function addDataBox3(location){
 	document.getElementById(`${location}`).appendChild(newBox);
 };
 
+function check(){};
 
-function writeGroups(){
+async function writeGroups(){
 
 	//Set up columns//
 	document.getElementById("breakdown-wrapper").style.display = 'block';
 
 	//Write into bk1 //
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 300; i++) {
+		await sleepNow(.05)
 		addDataBox3('bk1')
 	};
 
 	setTimeout(()=> {console.log('waiting') }, 17000);
 
 	//Write into bk2 //
-	for (i = 0; i < 20; i++) {
+	for (i = 0; i < 80; i++) {
+		await sleepNow(.05)
 		addDataBox3('bk2')
 	};
 	
 	setTimeout(function(){ }, 3000);
 
-	for (i = 0; i < 30; i++) {
+	for (i = 0; i < 160; i++) {
+		await sleepNow(.05)
 		addDataBox3('bk3')
 	};	
 	
@@ -88,9 +93,10 @@ function addElement(id){
 	document.getElementById(id).style.display = 'block';
 }
 
-function writeData (data, id) {
+async function writeData (data, id) {
 	for (i = 0; i < data.length; i++) {
 		let finding = data[i]['finding_category']
+		await sleepNow(.0001)
 		addDataBox2(i, finding, id)
 }};
 
@@ -124,6 +130,7 @@ function sceneIntro(){
 function scene1(counter){
 	removeBreakdown();
 	removeIntro();
+	clearData();
 	writeData(all_data, 0);		
 	moveBullet(counter);
 };
@@ -209,7 +216,6 @@ watchIntro.inView(()=>{
 const watch1 = new Watch(".scroll-spy-1");
 watch1.inView(()=>{
 	counter = 1
-	removeBreakdown();
 	scene1(counter);
 	console.log(`counter is at ${counter}`)
 	

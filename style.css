@@ -379,21 +379,34 @@ body {
         background-color: rgb(123, 189, 206);
         border-radius: 2%;
         vertical-align: top;
+        position: relative;
     }
 
-    .breakdown-div div{
-        justify-content: center;
-        padding: 20px 5px 10px 5px;
+    .breakdown-header{
+        margin-top: 10px;
+        margin-bottom:20px;
+    }
 
+    .bk {
+        position: absolute;
+        bottom: 5%;
+        margin-left:2%;
+        margin-right:2%
+    }
+
+
+    .breakdown-div div.tooltip{
+        padding: 2px 2px 4px 4px;
+        vertical-align: text-bottom;
     }
 
     .tooltip {
         background-color: crimson;
         padding: 5.5px;
         height: 1px;
-        margin-left: 2.5px;
-        margin-right: 2.5px;
-        margin-top: 2.5px;
+        margin-left: 1.5px;
+        margin-right: 1.5px;
+        margin-top: 1.5px;
      }
 
     .highlight{
