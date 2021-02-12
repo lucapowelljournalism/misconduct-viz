@@ -365,6 +365,28 @@ body {
         margin-top: 100px;
     }
 
+    .breakdown-wrapper{
+        height:100%;
+        display:none;
+    }
+
+    .breakdown-div{
+        font-style: oblique;
+        font-weight: bolder;
+        height: 100%;
+        width:32%;
+        display: inline-block;
+        background-color: rgb(123, 189, 206);
+        border-radius: 2%;
+        vertical-align: top;
+    }
+
+    .breakdown-div div{
+        justify-content: center;
+        padding: 20px 5px 10px 5px;
+
+    }
+
     .tooltip {
         background-color: crimson;
         padding: 5.5px;
