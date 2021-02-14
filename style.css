@@ -260,9 +260,6 @@ a:active {
         opacity: 0;
     }
 
-    .fade-in {
-        opacity: 1;
-    }
 
     /***** *****/
     #scrolltobegin{
@@ -279,6 +276,83 @@ a:active {
         margin-top: 10%;
     }
 
+    .explainer{
+        position: relative;
+        background-color: rgb(255, 154, 154);
+        border-radius: 1%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .explainer #police{
+        position: absolute;
+        max-width: 10%;
+        top: 15%;
+        left: 10%;
+        opacity: 0;
+        transition: opacity 0.3s;
+        
+    }
+
+    .explainer > img:nth-of-type(2){
+        position: absolute;
+        max-width: 5%;
+        top: 33%;
+        left: 13%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .explainer > img:nth-of-type(3){
+        position: absolute;
+        max-width: 10%;
+        top: 45%;
+        left: 9%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .explainer > img:nth-of-type(4){
+        position: absolute;
+        max-width: 5%;
+        top: 49%;
+        left: 30%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+
+    #explainer > img:nth-of-type(5){
+        position: absolute;
+        max-width: 10%;
+        top: 45%;
+        left: 44%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    #explainer > img:nth-of-type(6){
+        position: absolute;
+        max-width: 10%;
+        top: 70%;
+        left: 28%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    #explainer > img:nth-of-type(7){
+        position: absolute;
+        max-width: 6%;
+        top: 60%;
+        left: 30%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .fade-in {
+        opacity: 1;
+    }
     /*****  INTERACTIVES  **************/
 
     .wrapper {
@@ -374,7 +448,7 @@ a:active {
         background-color: rgb(220, 100, 150);
     }
     #FADO .tooltip{
-        background-color: rgb(220, 125, 175);
+        background-color: rgb(220, 152, 189);
     }
     #offduty .tooltip{
         background-color: rgb(220, 150, 200);
@@ -462,6 +536,10 @@ a:active {
     body > div.scroll-spy > div.scroll-text.scroll-spy-reset{
         height: 0;
         background-color: white;
+    }
+
+    body > div.scroll-spy > div.scroll-spy-explainer{
+        margin-left: 65%;
     }
 
     #caption10{

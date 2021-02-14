@@ -147,11 +147,58 @@ function sceneIntro(){
 	hideElement("breakdown-wrapper");
 	hideElement("graphic-main-boxes");
 	hideElement('wnyc');
+	hideElement('explainer');
 }
 
+function sceneExplainer(){
+	showElement("explainer");
+
+	setTimeout(() => {
+		$('.explainer').addClass("fade-in"); 
+	}, 500);
+
+	showElement('police');
+
+	setTimeout(() => {
+		document.querySelector('#police').style.opacity = "1"; 
+	}, 1000);
+
+	showElement('arrow1');
+	setTimeout(() => {
+		document.querySelector('#arrow1').style.opacity = "1"; 
+	}, 1500);
+
+	showElement('lawyer');
+	setTimeout(() => {
+		document.querySelector('#lawyer').style.opacity = "1"; 
+	}, 2000);
+
+	showElement('arrow2');
+	setTimeout(() => {
+		document.querySelector('#arrow2').style.opacity = "1"; 
+	}, 2500);
+
+	showElement('lawyer2');
+	setTimeout(() => {
+		document.querySelector('#lawyer2').style.opacity = "1"; 
+	}, 3000);
+
+	showElement('wnyc-explainer');
+	setTimeout(() => {
+		document.querySelector('#wnyc-explainer').style.opacity = "1"; 
+	}, 3500);
+
+	showElement('arrow3');
+	setTimeout(() => {
+		document.querySelector('#arrow3').style.opacity = "1"; 
+	}, 4000);
+
+};
+
 function sceneMainBoxes(counter){				
-	hideElement("breakdown-wrapper")
+	hideElement("breakdown-wrapper");
 	hideIntro();
+	hideElement('explainer');
 
 	showElement("graphic-main-boxes");
 	if (wrote_main===false){
@@ -307,6 +354,11 @@ const watchIntro = new Watch(".scroll-spy-intro");
 watchIntro.inView(()=>{
 	sceneIntro();
 })
+
+const watchExplainer = new Watch(".scroll-spy-explainer");
+watchExplainer.inView(()=>{
+	sceneExplainer();
+});
 
 const watchMainBoxes = new Watch(".scroll-spy-1");
 watchMainBoxes.inView(()=>{

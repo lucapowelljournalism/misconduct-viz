@@ -8,9 +8,10 @@
     <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="data.json"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 
+    <!--<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>-->
   </head>
 
   <body>
@@ -18,6 +19,7 @@
     <div class="wrapper">
       <div id="graphic" class="container graphic boxes fade-in">
         <h1 style="display:none;" id="title-hero" class="title-text">The Staten Island Police Files</h1>
+
         <div style="display: none;" class="wnyc" id="wnyc">
           <div class="wnyc-0" id="wnyc-0"></div>
           <div class="wnyc-1" id="wnyc-1"></div>
@@ -25,6 +27,18 @@
           <div class="wnyc-3" id="wnyc-3"></div>
           <div class="wnyc-4" id="wnyc-4"></div>
         </div>
+
+        <div class="explainer" style="display:none;" id="explainer">
+          <img class="police" id="police" src="img/001-police-station.svg"/>
+          <img id="arrow1" src="img/004-down-arrow.svg">
+          <img id="lawyer" src="img/002-lawyer.svg">
+          <img id="arrow2" src="img/003-right.svg">
+          <img id="lawyer2" src="img/002-lawyer.svg">
+          <img id="wnyc-explainer" src="img/Screen Shot 2021-02-14 at 12.10.46 PM.png">
+          <img id="arrow3" src="img/005-up-arrow.svg">
+        </div>
+
+
         <div id="graphic-main-boxes" style="display:none;">
           <p>Each box represents one misconduct finding.</p>
         </div>
@@ -84,7 +98,7 @@
     <div class="scroll-spy">
       <div class="scroll-text scroll-spy-reset"><p id="caption0"></p></div>
       <div class="scroll-spy-intro"><p id="captionintro">Following a Freedom of Information appeal by WNYC/Gothamist, the Staten Island District Attorney released thousands of letters containing disclosures about police witnesses. </p></div>
-      <div><p>The letters are written by attorneys at the District Attorney's office in preparation for trials. These attorneys are, by law, compelled to identify personnel information regarding police witnesses to defense attorneys.<br><br> As a result, the letters contain lawsuits, CCRB complaints and internal misconduct findings held within the NYPD's Central Personnel Index. The latter have yet to be disclosed as 50-a is litigated in court.</p></div>
+      <div class="scroll-spy-explainer"><p id="scroll-spy-explainer">The letters are written by attorneys at the District Attorney's office in preparation for trials. These attorneys are, by law, compelled to identify personnel information regarding police witnesses to defense attorneys.<br><br> As a result, the letters contain lawsuits, CCRB complaints and internal misconduct findings held within the NYPD's Central Personnel Index. The latter have yet to be disclosed as 50-a is litigated in court.</p></div>
       <div class="scroll-spy-1"><p>The letters document over 800 misconduct findings that have not been made public before. <br><br>Now, Gothamist/WNYC is making a slice of those misconduct findings available to the public.</p></div>
       <div class="scroll-spy-group-breakdown"><p id="scroll-spy-group-breakdown">Gothamist/WNYC broke the findings into three groups based on penalties that the misconduct would receive under the NYPD's own <a style="color:blue; cursor: pointer;"href="https://www1.nyc.gov/assets/home/downloads/pdf/office-of-the-mayor/2021/NYPD-Discipline-Matrix-Effective-01-15-2021.pdf">punishment guidelines.</a></p></div>
       <div class="scroll-spy-2"><p id="caption2">Excessive Force</p></div>
