@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="data.json"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 
   </head>
@@ -16,6 +18,16 @@
     <div class="wrapper">
       <div id="graphic" class="container graphic boxes fade-in">
         <h1 style="display:none;" id="title-hero" class="title-text">The Staten Island Police Files</h1>
+        <div style="display: none;" class="wnyc" id="wnyc">
+          <div class="wnyc-0" id="wnyc-0"></div>
+          <div class="wnyc-1" id="wnyc-1"></div>
+          <div class="wnyc-2" id="wnyc-2"></div>
+          <div class="wnyc-3" id="wnyc-3"></div>
+          <div class="wnyc-4" id="wnyc-4"></div>
+        </div>
+        <div id="graphic-main-boxes" style="display:none;">
+          <p>Each box represents one misconduct finding.</p>
+        </div>
 
         <div id="breakdown-wrapper" class="breakdown-wrapper">
           <div class="breakdown-div"><div class="breakdown-header">Minor Misconduct</div><div class="bk" id="bk1"></div></div>
@@ -24,14 +36,19 @@
         </div>
         
         <div id="findings-by-category">
-          <div class="category" style="display:none;" id="ef-category"><span>Excessive Force:</span><div class='category-data' id="EF"></div></div>
-          <div class="category" style="display:none;" id="dwi-category"><span>DWI:</span><div class='category-data' id="dwi"></div></div>
-          <div class="category" style="display:none;" id="lying-category"><span>False Statements:</span><div class="category-data" id="lying"></div></div>
-          <div class="category" style="display:none;" id="firearm-category"><span>Firearm Misconduct:</span><div class="category-data" id="firearm"></div></div>
-          <div class="category" style="display:none;" id="domestic-category"><span>Domestic Violence:</span><div class="category-data" id="domestic"></div></div>
-          <div class="category" style="display:none;" id="offduty-category"><span>Off-Duty Misconduct:</span><div class="category-data" id="offduty"></div></div>
-          <div class="category" style="display:none;" id="FADO-category"><span>FADO:</span><div class="category-data" id="FADO"></div></div>
-          <div class="category" style="display:none;" id="command-category"><span>All Other Minor Violations:</span><div class="category-data" id="command"></div></div>
+          <div class="category" style="display:none;" id="ef-category">
+            <div class="category-header">
+              <span>Excessive Force:</span>
+            </div>
+              <div class='category-data' id="EF"></div>
+            </div>
+          <div class="category" style="display:none;" id="dwi-category"><div class="category-header"><span>DWI:</span></div><div class='category-data' id="dwi"></div></div>
+          <div class="category" style="display:none;" id="lying-category"><div class="category-header"><span>False Statements:</span></div><div class="category-data" id="lying"></div></div>
+          <div class="category" style="display:none;" id="firearm-category"><div class="category-header"><span>Firearm Misconduct:</span></div><div class="category-data" id="firearm"></div></div>
+          <div class="category" style="display:none;" id="domestic-category"><div class="category-header"><span>Domestic Violence:</span></div><div class="category-data" id="domestic"></div></div>
+          <div class="category" style="display:none;" id="offduty-category"><div class="category-header"><span>Off-Duty Misconduct:</span></div><div class="category-data" id="offduty"></div></div>
+          <div class="category" style="display:none;" id="FADO-category"><div class="category-header"><span>FADO:</span></div><div class="category-data" id="FADO"></div></div>
+          <div class="category" style="display:none;" id="command-category"><div class="category-header"><span>All Other Minor Violations:</span></div><div class="category-data" id="command"></div></div>
         </div>
 
 
@@ -54,9 +71,11 @@
 
       <div id="caption-intro" class="caption container" style="display:none;" >
         <p>In 2020, WNYC won a FOIL request granting it access to thousands of documents written by district attorney's
-        regarding police officers. Within the documents, which are letters, lie hundreds of NYPD misconduct allegations pulled from the department's CPI (Central Personnel Index).</p></div>
+        regarding police officers. Within the documents, which are letters, lie hundreds of NYPD misconduct allegations pulled from the department's CPI (Central Personnel Index).
+        </p>
+      </div>
 
-      <div style="display: none;" id="announce" class="center content container">
+      <div style="display: none;" id="scrolltobegin" class="center content container">
         <h1>Scroll to begin</h1>
       </div>
       
@@ -65,9 +84,9 @@
     <div class="scroll-spy">
       <div class="scroll-text scroll-spy-reset"><p id="caption0"></p></div>
       <div class="scroll-spy-intro"><p id="captionintro">Following a Freedom of Information appeal by WNYC/Gothamist, the Staten Island District Attorney released thousands of letters containing disclosures about police witnesses. </p></div>
-      <div><p>The letters are written by attorneys at the District Attorney's office in preparation for trials. These attorneys are, by law, compelled to identify personnel information regarding police witnesses to defense attorneys. As a result, the letters contain lawsuits, CCRB complaints and internal misconduct findings held within the NYPD's Central Personnel Index. The latter have yet to be disclosed as 50-a is litigated in court.</p></div>
-      <div class="scroll-spy-1"><p>The letters document over 800 misconduct findings that have not been made public before. Now, Gothamist/WNYC is making a slice of those misconduct findings available to the public.</p></div>
-      <div class="scroll-spy-group-breakdown"><p id="scroll-spy-group-breakdown">Gothamist/WNYC broke them into three groups based on penalties that the misconduct would receive under the NYPD's own <a style="color:blue; cursor: pointer;"href="https://www1.nyc.gov/assets/home/downloads/pdf/office-of-the-mayor/2021/NYPD-Discipline-Matrix-Effective-01-15-2021.pdf">punishment guidelines.</a></p></div>
+      <div><p>The letters are written by attorneys at the District Attorney's office in preparation for trials. These attorneys are, by law, compelled to identify personnel information regarding police witnesses to defense attorneys.<br><br> As a result, the letters contain lawsuits, CCRB complaints and internal misconduct findings held within the NYPD's Central Personnel Index. The latter have yet to be disclosed as 50-a is litigated in court.</p></div>
+      <div class="scroll-spy-1"><p>The letters document over 800 misconduct findings that have not been made public before. <br><br>Now, Gothamist/WNYC is making a slice of those misconduct findings available to the public.</p></div>
+      <div class="scroll-spy-group-breakdown"><p id="scroll-spy-group-breakdown">Gothamist/WNYC broke the findings into three groups based on penalties that the misconduct would receive under the NYPD's own <a style="color:blue; cursor: pointer;"href="https://www1.nyc.gov/assets/home/downloads/pdf/office-of-the-mayor/2021/NYPD-Discipline-Matrix-Effective-01-15-2021.pdf">punishment guidelines.</a></p></div>
       <div class="scroll-spy-2"><p id="caption2">Excessive Force</p></div>
       <div class="scroll-spy-3"><p id="caption3">DWI.</p></div>
       <div class="scroll-spy-4"><p id="caption4">Lying</p></div>

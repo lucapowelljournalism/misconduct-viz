@@ -1,6 +1,38 @@
 const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve,delay)) //Delay function //
 
 
+counter = 0 //Keeps track of where the visualization is.
+let wrote_main = false;
+let wrote_force = false;
+let wrote_dwi = false;
+let wrote_lying = false;
+let wrote_firearm = false;
+let wrote_domestic = false;
+let wrote_fado = false;
+let wrote_offduty = false;
+let wrote_minor = false;
+
+writeGroups();
+
+function wnyc(){
+	setTimeout(() => {
+		$('#wnyc-1').addClass("fade-in");  
+	}, 500);
+
+	setTimeout(() => {
+		$('#wnyc-2').addClass("fade-in");  
+	}, 1000);
+
+	setTimeout(() => {
+		$('#wnyc-3').addClass("fade-in");  
+	}, 1500);
+
+	setTimeout(() => {
+		$('#wnyc-4').addClass("fade-in");  
+	}, 2000);
+
+}
+
 async function addDataBox2 (i, finding, id,location) {
 
 	const newBox = 	document.createElement("div");
@@ -24,6 +56,7 @@ async function addDataBox2 (i, finding, id,location) {
 function addDataBox3(location){
 	const newBox = 	document.createElement("div");
 	$(newBox).addClass(`tooltip`);
+
 	setTimeout(() => {
 		$(newBox).addClass("fade-in"); 
 	}, 650);
@@ -32,36 +65,27 @@ function addDataBox3(location){
 };
 
 async function writeGroups(){
-
-	document.getElementById("breakdown-wrapper").style.display = 'block';
-
+	await sleepNow(.05)
 	//Write into bk1 //
 	for (i = 0; i < 300; i++) {
-		await sleepNow(.05)
 		addDataBox3('bk1')
 	};
-
-	setTimeout(()=> {console.log('waiting') }, 17000);
-
+	await sleepNow(.05)
 	//Write into bk2 //
 	for (i = 0; i < 80; i++) {
-		await sleepNow(.05)
 		addDataBox3('bk2')
 	};
-	
-	setTimeout(function(){ }, 3000);
-
+	await sleepNow(.05)
 	for (i = 0; i < 160; i++) {
-		await sleepNow(.05)
 		addDataBox3('bk3')
 	};	
 	
 };
 
-function removeIntro(){
-	removeElement('announce');
-	removeElement('title-hero');
-	removeElement('caption-intro')
+function hideIntro(){
+	hideElement('scrolltobegin');
+	hideElement('title-hero');
+	hideElement('caption-intro');
 };
 
 function moveBullet(counter){
@@ -76,13 +100,16 @@ function moveBullet(counter){
 
 };
 
-function removeElement(id){
+function hideElement(id){
 	document.getElementById(id).style.display = 'none';
-	document
 }
 
-function addElement(id){
+function showElement(id){
 	document.getElementById(id).style.display = 'block';
+}
+
+function showFlexElement(id){
+	document.getElementById(id).style.display = 'flex';
 }
 
 async function writeData (data, id,location) {
@@ -93,126 +120,182 @@ async function writeData (data, id,location) {
 }};
 
 
-function clearData(){
+function clearData(){													//Hides every single red box//
 	let startingBoxes = document.getElementsByClassName('tooltip');
 	for (i = 0; i < startingBoxes.length; i++){
-		startingBoxes[i].style.display = 'none';
+		startingBoxes[i].style.display = "none";
 	}
 
 	//fade out on these boxes??
 };
 
-function clearCategoryData(boxId){
-	let startingBoxes = document.getElementsByClassName(`${boxId}`);
-	for (i = 0; i < startingBoxes.length; i++){
-		startingBoxes[i].style.display = 'none';
-	}
+/////////////////////////////////////////////////////////////
 
-	//fade out on these boxes??
-};
-
-
-counter = 0 //Keeps track of where the visualization is.
 
 function resetToBeginning(counter){
 	if (counter === 0){
-		clearData();
-		removeElement("breakdown-wrapper")
 		moveBullet(counter);
-		addElement('announce');
-		addElement('title-hero');
+		showElement('scrolltobegin');
+		showElement('title-hero');
+		showElement('wnyc')
+		wnyc();
 	}
 }
 
 function sceneIntro(){
-	clearData();
-	removeIntro()
-	removeElement("breakdown-wrapper")
+	hideIntro();
+	hideElement("breakdown-wrapper");
+	hideElement("graphic-main-boxes");
+	hideElement('wnyc');
 }
 
-function scene1(counter){
-	removeElement("breakdown-wrapper")
-	removeIntro();
-	clearData();
-	writeData(all_data, 0,"graphic");		
+function sceneMainBoxes(counter){				
+	hideElement("breakdown-wrapper")
+	hideIntro();
+
+	showElement("graphic-main-boxes");
+	if (wrote_main===false){
+		writeData(all_data, 0,"graphic-main-boxes");
+		wrote_main=true;
+	} else if (wrote_main===true){
+		//pass;
+	};
+	
 	moveBullet(counter);
 };
 
 function sceneGroupBreakdown(counter){
-	clearData();
-	removeIntro();
-	removeElement("findings-by-category");
-	writeGroups();
-	moveBullet(counter)
+	hideIntro();
+	hideElement("graphic-main-boxes");
+	hideElement("findings-by-category");
 
+	showElement("breakdown-wrapper");
+	moveBullet(counter)
 }
+
+
 
 function scene2(counter){ 				//Force
-	clearData();
-	removeElement("breakdown-wrapper");
-	removeElement("dwi-category");
 
-	addElement("findings-by-category");
-	addElement("ef-category");
-	writeData(force_data, counter, 'EF');
+	hideElement("breakdown-wrapper");
+	hideElement("dwi-category")
+
+	showElement("findings-by-category");   //Show section
+	showFlexElement("ef-category");            //Show div
+
+	if (wrote_force === false){
+		writeData(force_data, counter, 'EF'); 
+		wrote_force = true
+	} else if (wrote_force === true){
+		//pass
+	};
+
 	moveBullet(counter);
-
-	removeElement("dwi-category");
-	clearCategoryData("4")
+	
 }
 
-function scene3(counter){      			//DWI
-	addElement("dwi-category");
-	removeElement("lying-category");
-	clearCategoryData("5")
-	writeData(dwi_data, counter, "dwi");
+function scene3(counter){      					//DWI
+	showFlexElement("dwi-category");				//Show the DWI category
+
+	if (wrote_dwi === false){
+		writeData(dwi_data, counter, "dwi");
+		wrote_dwi = true;
+	} else if (wrote_dwi === true) {
+		//pass
+	};
+
 	moveBullet(counter)
+	hideElement("lying-category");
+
+
 };
 
 function scene4(counter){
-	addElement("lying-category");
-	removeElement("firearm-category")
-	clearCategoryData("6")
-	writeData(lying_data, counter, "lying");
+	showFlexElement("lying-category");
+	if (wrote_lying ===false){
+		writeData(lying_data, counter, "lying");
+		wrote_lying = true;
+	} else if(wrote_lying ===true){
+		//pass
+	};
+	hideElement("firearm-category");
 	moveBullet(counter);
+
+
 }
 
 function scene5(counter){
-	addElement("firearm-category");
-	removeElement("domestic-category");
-	clearCategoryData("7")
-	writeData(firearm_data, counter, "firearm");
+	showFlexElement("firearm-category");
+
+	if (wrote_firearm === false){
+		writeData(firearm_data, counter, "firearm");
+		wrote_firearm = true;
+	} else if (wrote_firearm === true){
+		//pass
+	}
 	moveBullet(counter);
+	hideElement("domestic-category");
+
 }
 
 function scene6(counter){
-	addElement("domestic-category");
-	removeElement("offduty-category");
-	clearCategoryData("8")
-	writeData(domesticEEO_data, counter, "domestic");
+	showFlexElement("domestic-category");
+
+	if (wrote_domestic ===false){
+		writeData(domesticEEO_data, counter, "domestic");
+		wrote_domestic = true;
+	} else if (wrote_domestic === true){
+		//pass;
+	}
+
 	moveBullet(counter);
+	hideElement("offduty-category");
+
 }
 
 function scene7(counter){
-	addElement("offduty-category");
-	removeElement("FADO-category");
-	clearCategoryData("9")
-	writeData(offDuty_data, counter, "offduty");
+	showFlexElement("offduty-category");
+
+	if (wrote_offduty ===false){
+		writeData(offDuty_data, counter, "offduty");
+		wrote_offduty = true;
+	} else if (wrote_offduty === true){
+		//pass;
+	}
+
+	hideElement("FADO-category");
 	moveBullet(counter);
 }
 
 function scene8(counter){
-	addElement("FADO-category");
-	removeElement("command-category")
-	writeData(fado_data, counter, "FADO");
+	showFlexElement("FADO-category");
+
+	if (wrote_fado === false){
+		writeData(fado_data, counter, "FADO");
+		wrote_fado = true;
+	} else if ( wrote_fado===true){
+		//pass
+	}
+
 	moveBullet(counter);
+	hideElement("command-category")
+
 }
 
 function scene9(counter){
-	addElement("command-category");
-	writeData(commandDiscipline_data, counter, "command");
-	moveBullet(counter)
+	showFlexElement("command-category");
+
+	if (wrote_minor===false){
+		writeData(commandDiscipline_data, counter, "command");
+		wrote_command = true;
+	} else if (wrote_minor===true){
+		//pass
+	}
+
+	moveBullet(counter);
 }
+
+////////////////////////////////////////////////////////////////////////
 
 const watchReset = new Watch(".scroll-spy-reset");
 watchReset.inView(()=>{
@@ -225,10 +308,10 @@ watchIntro.inView(()=>{
 	sceneIntro();
 })
 
-const watch1 = new Watch(".scroll-spy-1");
-watch1.inView(()=>{
+const watchMainBoxes = new Watch(".scroll-spy-1");
+watchMainBoxes.inView(()=>{
 	counter = 1
-	scene1(counter);
+	sceneMainBoxes(counter);
 });
 
 const watchGroupBreakdown = new Watch(".scroll-spy-group-breakdown");
