@@ -318,26 +318,6 @@ body {
 
     }
 
-/**** Buttons *****/
-
-    .vizbuttons{
-        max-width: 60%;
-        margin: 0 auto;
-        text-align: center;
-        align-items: center;
-
-        list-style-type: none;
-    }
-
-    .vizbuttons li{
-        flex: auto;
-        width: 50px;
-    }
-
-    button {
-        width: 120px;
-    }
-
     .fade-in {
         animation: ease-in-out  20s;
         -webkit-animation: ease-in-out  20s;
@@ -394,10 +374,19 @@ body {
         margin-right:2%
     }
 
-
     .breakdown-div div.tooltip{
         padding: 2px 2px 4px 4px;
         vertical-align: text-bottom;
+    }
+    .category {
+        display: flex;
+        height: 30px;
+    }
+
+
+    #findings-by-category div span{
+       float:left;
+       max-height: 10%;
     }
 
     .tooltip {
@@ -407,6 +396,8 @@ body {
         margin-left: 1.5px;
         margin-right: 1.5px;
         margin-top: 1.5px;
+        border-radius: 5%;
+        vertical-align: bottom;
      }
 
     .highlight{
@@ -445,7 +436,8 @@ body {
         width: 300px;
         margin: 0 auto;
         margin-top: 100vh;
-        background-color: lightgrey;  /*These are styles for the font in the gray scrolling boxes*/
+        color: white;
+        background-color: lightslategray;  /*These are styles for the font in the gray scrolling boxes*/
         opacity: .98;
         border-radius: 2%;
         max-height: 40vh;

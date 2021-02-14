@@ -1,25 +1,23 @@
-const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve,delay))
+const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve,delay)) //Delay function //
 
-async function addDataBox2 (i, finding, id) {
 
-	//Make box with class tooltip//
+async function addDataBox2 (i, finding, id,location) {
+
 	const newBox = 	document.createElement("div");
 	$(newBox).addClass(`tooltip ${id}`);
 
 	setTimeout(() => {
-		$(newBox).addClass("fade-in");  //Fade effect on the boxes
+		$(newBox).addClass("fade-in");  
 	}, 250);
 
-	//Add p element with class tooltiptext to the box
 	let misconductPTag = document.createElement("p");
 	$(misconductPTag).addClass("tooltiptext");
 	newBox.appendChild(misconductPTag);
 
-	//Pass finding into the p tag
 	let newFinding = document.createTextNode(finding);
 	misconductPTag.appendChild(newFinding); 
 
-	document.getElementById("graphic").appendChild(newBox);
+	document.getElementById(`${location}`).appendChild(newBox);
 };
 
 
@@ -27,17 +25,14 @@ function addDataBox3(location){
 	const newBox = 	document.createElement("div");
 	$(newBox).addClass(`tooltip`);
 	setTimeout(() => {
-		$(newBox).addClass("fade-in");  //Fade effect on the boxes
+		$(newBox).addClass("fade-in"); 
 	}, 650);
 
 	document.getElementById(`${location}`).appendChild(newBox);
 };
 
-function check(){};
-
 async function writeGroups(){
 
-	//Set up columns//
 	document.getElementById("breakdown-wrapper").style.display = 'block';
 
 	//Write into bk1 //
@@ -63,10 +58,6 @@ async function writeGroups(){
 	
 };
 
-function removeBreakdown(){
-	document.getElementById("breakdown-wrapper").style.display = 'none';
-};
-
 function removeIntro(){
 	removeElement('announce');
 	removeElement('title-hero');
@@ -81,23 +72,24 @@ function moveBullet(counter){
 
 	//lights up next bullet//
 
-	bullets[counter].style.color = 'crimson'; //color the active bullet
+	bullets[counter].style.color = 'crimson'; //color the active bullet	removeElement("dwi-category")
 
 };
 
 function removeElement(id){
 	document.getElementById(id).style.display = 'none';
+	document
 }
 
 function addElement(id){
 	document.getElementById(id).style.display = 'block';
 }
 
-async function writeData (data, id) {
+async function writeData (data, id,location) {
 	for (i = 0; i < data.length; i++) {
 		let finding = data[i]['finding_category']
-		await sleepNow(.0001)
-		addDataBox2(i, finding, id)
+		/*await sleepNow(.0001)*/
+		addDataBox2(i, finding, id, `${location}`)
 }};
 
 
@@ -110,147 +102,158 @@ function clearData(){
 	//fade out on these boxes??
 };
 
+function clearCategoryData(boxId){
+	let startingBoxes = document.getElementsByClassName(`${boxId}`);
+	for (i = 0; i < startingBoxes.length; i++){
+		startingBoxes[i].style.display = 'none';
+	}
+
+	//fade out on these boxes??
+};
+
 
 counter = 0 //Keeps track of where the visualization is.
 
 function resetToBeginning(counter){
-	clearData();
-	removeBreakdown();
-	moveBullet(counter)
-	addElement('announce');
-	addElement('title-hero');
+	if (counter === 0){
+		clearData();
+		removeElement("breakdown-wrapper")
+		moveBullet(counter);
+		addElement('announce');
+		addElement('title-hero');
+	}
 }
 
 function sceneIntro(){
 	clearData();
 	removeIntro()
-	removeBreakdown();
+	removeElement("breakdown-wrapper")
 }
 
 function scene1(counter){
-	removeBreakdown();
+	removeElement("breakdown-wrapper")
 	removeIntro();
 	clearData();
-	writeData(all_data, 0);		
+	writeData(all_data, 0,"graphic");		
 	moveBullet(counter);
 };
 
 function sceneGroupBreakdown(counter){
 	clearData();
 	removeIntro();
+	removeElement("findings-by-category");
 	writeGroups();
 	moveBullet(counter)
 
 }
 
-function scene2(counter){
+function scene2(counter){ 				//Force
 	clearData();
-	removeBreakdown();
-	writeData(force_data, counter);
+	removeElement("breakdown-wrapper");
+	removeElement("dwi-category");
+
+	addElement("findings-by-category");
+	addElement("ef-category");
+	writeData(force_data, counter, 'EF');
 	moveBullet(counter);
+
+	removeElement("dwi-category");
+	clearCategoryData("4")
 }
 
-function scene3(counter){
-	clearData();
-	writeData(dwi_data, counter);
+function scene3(counter){      			//DWI
+	addElement("dwi-category");
+	removeElement("lying-category");
+	clearCategoryData("5")
+	writeData(dwi_data, counter, "dwi");
 	moveBullet(counter)
 };
 
 function scene4(counter){
-	clearData();
-	writeData(lying_data, counter);
+	addElement("lying-category");
+	removeElement("firearm-category")
+	clearCategoryData("6")
+	writeData(lying_data, counter, "lying");
 	moveBullet(counter);
 }
 
 function scene5(counter){
-	clearData();
-	writeData(firearm_data, counter);
+	addElement("firearm-category");
+	removeElement("domestic-category");
+	clearCategoryData("7")
+	writeData(firearm_data, counter, "firearm");
 	moveBullet(counter);
 }
 
 function scene6(counter){
-	clearData();
-	writeData(domesticEEO_data, counter);
+	addElement("domestic-category");
+	removeElement("offduty-category");
+	clearCategoryData("8")
+	writeData(domesticEEO_data, counter, "domestic");
 	moveBullet(counter);
 }
 
 function scene7(counter){
-	clearData();
-	writeData(offDuty_data, counter);
+	addElement("offduty-category");
+	removeElement("FADO-category");
+	clearCategoryData("9")
+	writeData(offDuty_data, counter, "offduty");
 	moveBullet(counter);
 }
 
 function scene8(counter){
-	clearData();
-	writeData(fado_data, counter);
+	addElement("FADO-category");
+	removeElement("command-category")
+	writeData(fado_data, counter, "FADO");
 	moveBullet(counter);
 }
 
 function scene9(counter){
-	clearData();
-	writeData(commandDiscipline_data, counter);
+	addElement("command-category");
+	writeData(commandDiscipline_data, counter, "command");
 	moveBullet(counter)
 }
 
-
-					/*********                 *********/
-					/******** SCROLL SPY LOGIC ********/
-					/********                 ********/
-
-// Stage 0: Title and header //
 const watchReset = new Watch(".scroll-spy-reset");
 watchReset.inView(()=>{
 	counter = 0
 	resetToBeginning(counter);
-	console.log(`counter is at ${counter}`)
 });
 
-//Scene Intro: Text only //
 const watchIntro = new Watch(".scroll-spy-intro");
 watchIntro.inView(()=>{
 	sceneIntro();
-	console.log(`counter is at ${counter}`)
 })
 
-//	Scene 1: Base boxes //
 const watch1 = new Watch(".scroll-spy-1");
 watch1.inView(()=>{
 	counter = 1
 	scene1(counter);
-	console.log(`counter is at ${counter}`)
-	
 });
 
-//Scene Groupbreakdown : Three groupings of boxes: Minor (Command), Rules, and everything up.
 const watchGroupBreakdown = new Watch(".scroll-spy-group-breakdown");
 watchGroupBreakdown.inView(()=>{
 	counter = 2
 	sceneGroupBreakdown(counter);
-	console.log(`counter is at ${counter}`)
-})
+});
 
 
 const watch2 = new Watch(".scroll-spy-2");
 watch2.inView(() => {
 	counter = 3
 	scene2(counter);
-	console.log(`counter is at ${counter}`)
-
 });
 
 const watch3 = new Watch(".scroll-spy-3");
 watch3.inView(() => {
 	counter = 4
 	scene3(counter);
-	console.log('Interactive at Scene 3')
-
 });
 
 const watch4 = new Watch(".scroll-spy-4");
 watch4.inView(() => {
 	counter = 5;
 	scene4(counter);
-	console.log('At Scene 4');
 });
 
 const watch5 = new Watch(".scroll-spy-5");
@@ -258,7 +261,6 @@ const watch5 = new Watch(".scroll-spy-5");
 watch5.inView(() => {
 	counter = 6;
 	scene5(counter);
-	console.log('At Scene 5');
 });
 
 const watch6 = new Watch(".scroll-spy-6");
@@ -289,99 +291,3 @@ watch9.inView(() => {
 });
 
 
-//Code Graveyard//
-
-/*
-document.addEventListener("DOMContentLoaded", () => {
-	document.querySelectorAll(".slide_trigger").forEach(s => {
-		new Watch(s).inView(() => {
-			Visualize(s.dataset.id);
-			//update caption and boxes
-			console.log('asdf')
-		})
-	});
-});*/
-
-/*function addHighlight(counter){
-
-	//Add highlight//
-	let boxes = document.getElementsByClassName(`${counter}`)
-	console.log(counter)
-	for (var i = 0; i < boxes.length; i++) {
-		boxes[i].classList.add('highlight');
-	 }
-};
-
-function removeHighlight(){
-	//Remove highlight//
-	let oldBoxes = document.getElementsByClassName("tooltip")
-	for (var i = 0; i < oldBoxes.length; i++) {
-		oldBoxes[i].classList.remove('highlight');
-	 }
-}
-
-function Visualize(){
-	counter=counter + 1
-
-	console.log(`Counter at ${counter}.`)
-
-	if (counter === 1){
-		clearData(); //Grabs all current .tooltip and sets to display=none//
-		writeData(force_data, counter); //Writes x number of boxes//
-		moveBullet(counter); //Moves the bullet down based on the counter position.
-		/*activateButton('previous-button');*/
-		/*document.getElementById('next-button').innerHTML = "Next"; //Changes button text from 'begin' to 'next'
-
-	} else if (counter === 2){
-		removeHighlight();
-		writeData(dwi_data, counter);
-		moveBullet(counter);
-
-	} else if (counter === 3){
-		removeHighlight();
-		writeData(lying_data, counter);
-		moveBullet(counter);
-
-
-	} else if (counter === 4){
-		removeHighlight();
-		writeData(firearm_data, counter);
-		moveBullet(counter);
-
-	} else if (counter ===5){
-		removeHighlight();
-		writeData(domesticEEO_data, counter);
-		moveBullet(counter);
-
-	} else if (counter ===6){
-		removeHighlight();
-		writeData(offDuty_data, counter);
-		moveBullet(counter);
-
-	} else if (counter ===7){
-		removeHighlight();
-		writeData(fado_data, counter); //
-		moveBullet(counter);
-
-	} else if (counter ===8){
-		removeHighlight();
-		writeData(commandDiscipline_data, counter);
-
-	} else if (counter===9){
-		removeHighlight();
-		/*deactivateButton('next-button');
-		moveBullet(counter);
-	}
-};
-
-
-/*function activateButton(buttonID){
-	document.getElementById(`${buttonID}`).disabled = false;
-};
-
-function deactivateButton(buttonID){
-	document.getElementById(`${buttonID}`).disabled = true;
-};
-
-
-*/
