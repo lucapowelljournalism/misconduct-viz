@@ -372,6 +372,22 @@ a:active {
         margin-top: 100px;
     }
 
+    .tooltip {
+        background-color: #DE1E3D;
+        padding: 5.5px;
+        height: 1px;
+        margin-left: 1.5px;
+        margin-right: 1.5px;
+        margin-top: 1.5px;
+        border-radius: 15%;
+        vertical-align: bottom;
+     }
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
     #graphic-main-boxes .tooltip{
         padding: 8px;
         margin-top:3px;
@@ -379,6 +395,18 @@ a:active {
         margin-right: 3px;
     }
 
+    .highlight-minor{
+        background-color: pink;
+    }
+
+    .highlight-rules{
+        background-color:yellowgreen;
+    }
+
+    .highlight-serious{
+        background-color:slategray;
+    }
+    /*
     .breakdown-wrapper{
         height:100%;
         display:none;
@@ -413,6 +441,8 @@ a:active {
         padding: 8px;
         vertical-align: text-bottom;
     }
+    */
+
     .category {
         height: 45px;
         width: 100%;
@@ -455,22 +485,6 @@ a:active {
     }
     #command .tooltip{
         background-color: rgb(220, 175, 225);
-    }
-
-    .tooltip {
-        background-color: #DE1E3D;
-        padding: 5.5px;
-        height: 1px;
-        margin-left: 1.5px;
-        margin-right: 1.5px;
-        margin-top: 1.5px;
-        border-radius: 15%;
-        vertical-align: bottom;
-     }
-
-    .tooltip {
-        position: relative;
-        display: inline-block;
     }
     
     .tooltip .tooltiptext {

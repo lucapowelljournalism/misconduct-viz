@@ -12,8 +12,6 @@ let wrote_fado = false;
 let wrote_offduty = false;
 let wrote_minor = false;
 
-writeGroups();
-
 function wnyc(){
 	setTimeout(() => {
 		$('#wnyc-1').addClass("fade-in");  
@@ -115,19 +113,10 @@ function showFlexElement(id){
 async function writeData (data, id,location) {
 	for (i = 0; i < data.length; i++) {
 		let finding = data[i]['finding_category']
-		/*await sleepNow(.0001)*/
 		addDataBox2(i, finding, id, `${location}`)
 }};
 
 
-function clearData(){													//Hides every single red box//
-	let startingBoxes = document.getElementsByClassName('tooltip');
-	for (i = 0; i < startingBoxes.length; i++){
-		startingBoxes[i].style.display = "none";
-	}
-
-	//fade out on these boxes??
-};
 
 /////////////////////////////////////////////////////////////
 
@@ -144,7 +133,6 @@ function resetToBeginning(counter){
 
 function sceneIntro(){
 	hideIntro();
-	hideElement("breakdown-wrapper");
 	hideElement("graphic-main-boxes");
 	hideElement('wnyc');
 	hideElement('explainer');
@@ -196,14 +184,18 @@ function sceneExplainer(){
 };
 
 function sceneMainBoxes(counter){				
-	hideElement("breakdown-wrapper");
 	hideIntro();
 	hideElement('explainer');
+	hideElement("findings-by-category");
 
 	showElement("graphic-main-boxes");
 	if (wrote_main===false){
-		writeData(all_data, 0,"graphic-main-boxes");
+		writeData(serious_data, "serious","graphic-main-boxes");
+		writeData(rules_data, "rules","graphic-main-boxes");
+		writeData(minor_data, "minor","graphic-main-boxes");
+
 		wrote_main=true;
+
 	} else if (wrote_main===true){
 		//pass;
 	};
@@ -211,21 +203,21 @@ function sceneMainBoxes(counter){
 	moveBullet(counter);
 };
 
-function sceneGroupBreakdown(counter){
-	hideIntro();
-	hideElement("graphic-main-boxes");
-	hideElement("findings-by-category");
-
-	showElement("breakdown-wrapper");
-	moveBullet(counter)
+function highlightMinor(){
+	$(`.minor`).addClass('highlight-minor')
 }
 
+function highlightRules(){
+	$(`.rules`).addClass('highlight-rules')
+}
 
+function highlightSerious(){
+	$(`.serious`).addClass('highlight-serious')
+}
 
 function scene2(counter){ 				//Force
-
-	hideElement("breakdown-wrapper");
-	hideElement("dwi-category")
+	hideElement("graphic-main-boxes");
+	hideElement("dwi-category");
 
 	showElement("findings-by-category");   //Show section
 	showFlexElement("ef-category");            //Show div
@@ -366,10 +358,21 @@ watchMainBoxes.inView(()=>{
 	sceneMainBoxes(counter);
 });
 
-const watchGroupBreakdown = new Watch(".scroll-spy-group-breakdown");
-watchGroupBreakdown.inView(()=>{
+const watchHighlight1 = new Watch(".scroll-spy-highlight1");
+watchHighlight1.inView(()=>{
 	counter = 2
-	sceneGroupBreakdown(counter);
+	highlightSerious();
+});
+
+const watchHighlight2 = new Watch(".scroll-spy-highlight2");
+watchHighlight2.inView(()=>{
+	highlightRules();
+});
+
+const watchHighlight3 = new Watch(".scroll-spy-highlight3");
+watchHighlight3.inView(()=>{
+	highlightSerious();
+	highlightMinor();
 });
 
 
